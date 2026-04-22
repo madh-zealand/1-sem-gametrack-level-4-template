@@ -126,11 +126,9 @@
     var scenes = this.root.querySelectorAll(".scene");
     scenes.forEach(function (scene) {
       scene.classList.remove("is-active");
-      scene.setAttribute("aria-hidden", "true");
     });
 
     nextScene.classList.add("is-active");
-    nextScene.setAttribute("aria-hidden", "false");
     this.currentScene = nextScene;
     this.currentSteps = Array.from(nextScene.querySelectorAll(".steps [data-step]"));
     this.stepIndex = 0;

@@ -33,10 +33,10 @@ It is intentionally simple:
 
 ```html
 <section class="scene" id="intro-scene">
-  <img class="scene-background" src="assets/images/bg-campus.svg" alt="Campus">
-  <img class="character is-hidden" data-char="ava" src="assets/images/char-ava.svg" alt="Ava">
+  <img class="scene-background" src="assets/images/bg-campus.svg">
+  <img class="character is-hidden" data-char="ava" src="assets/images/char-ava.svg">
 
-  <div class="steps" aria-hidden="true">
+  <div class="steps">
     <div data-step="show" data-target='[data-char="ava"]'></div>
     <div data-step="say" data-character="ava" data-speaker="Ava">
       The radio should be silent by now.
