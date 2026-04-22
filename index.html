@@ -1,150 +1,348 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Level 4 Visual Novel Engine</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 4 Visual Novel Engine</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main class="app-shell">
-    <section class="viewport">
-      <section class="stage-screen" aria-label="Visual novel demo">
-      <section class="scene" id="intro-scene" aria-hidden="true">
-        <img class="scene-background" src="assets/images/scenes/scene-living-room.png" alt="Living room scene">
-        <img class="character character-left is-hidden" data-char="abigail" src="assets/images/characters/char-abigail-neutral.png" alt="Abigail with a neutral expression">
-        <img class="character character-right is-hidden" data-char="jessica" src="assets/images/characters/char-jessica-happy.png" alt="Jessica with a happy expression">
-        <img class="item item-left item-low" src="assets/images/items/item-backpack.png" alt="Backpack">
-        <img class="item item-center item-low item-small" src="assets/images/items/item-mug.png" alt="Mug">
-        <img class="item item-right item-mid item-small" src="assets/images/items/item-phone.png" alt="Phone">
+    <main class="app-shell">
+        <section class="viewport">
+            <section class="stage-screen" aria-label="Visual novel demo">
+                <section class="scene" id="intro-scene" aria-hidden="true">
+                    <img
+                        class="scene-background"
+                        src="assets/images/scenes/scene-living-room.png"
+                        alt="Living room scene"
+                    >
+                    <img
+                        class="character character-left is-hidden"
+                        data-char="abigail"
+                        src="assets/images/characters/char-abigail-neutral.png"
+                        alt="Abigail with a neutral expression"
+                    >
+                    <img
+                        class="character character-right is-hidden"
+                        data-char="jessica"
+                        src="assets/images/characters/char-jessica-happy.png"
+                        alt="Jessica with a happy expression"
+                    >
+                    <img
+                        class="item item-left item-low"
+                        src="assets/images/items/item-backpack.png"
+                        alt="Backpack"
+                    >
+                    <img
+                        class="item item-center item-low item-small"
+                        src="assets/images/items/item-mug.png"
+                        alt="Mug"
+                    >
+                    <img
+                        class="item item-right item-mid item-small"
+                        src="assets/images/items/item-phone.png"
+                        alt="Phone"
+                    >
 
-        <div class="steps" aria-hidden="true">
-          <div data-step="show" data-target='[data-char="abigail"]'></div>
-          <div data-step="show" data-target='[data-char="jessica"]'></div>
-          <div data-step="say" data-character="abigail" data-speaker="Abigail">Jack invited us to a late-night idea session in the villa garden. We only have a few minutes to get ready.</div>
-          <div data-step="wait-click"></div>
-          <div data-step="say" data-character="jessica" data-speaker="Jessica">Bring the backpack if you want to play hero later. Or take only your phone and travel light.</div>
-          <div data-step="choice">
-            <button type="button" data-run="packBackpack" data-next="park-scene">Pack the backpack</button>
-            <button type="button" data-run="travelLight" data-next="park-scene">Take only the phone</button>
-          </div>
-        </div>
-      </section>
+                    <div class="steps" aria-hidden="true">
+                        <div data-step="show" data-target='[data-char="abigail"]'></div>
+                        <div data-step="show" data-target='[data-char="jessica"]'></div>
+                        <div data-step="say" data-character="abigail" data-speaker="Abigail">
+                            Jack invited us to a late-night idea session in the
+                            villa garden. We only have a few minutes to get
+                            ready.
+                        </div>
+                        <div data-step="wait-click"></div>
+                        <div data-step="say" data-character="jessica" data-speaker="Jessica">
+                            Bring the backpack if you want to play hero later.
+                            Or take only your phone and travel light.
+                        </div>
+                        <div data-step="choice">
+                            <button type="button" data-run="packBackpack" data-next="park-scene">
+                                Pack the backpack
+                            </button>
+                            <button type="button" data-run="travelLight" data-next="park-scene">
+                                Take only the phone
+                            </button>
+                        </div>
+                    </div>
+                </section>
 
-      <section class="scene" id="park-scene" aria-hidden="true">
-        <img class="scene-background" src="assets/images/scenes/scene-park.png" alt="Park scene at dusk">
-        <img class="character character-left is-hidden" data-char="abigail" src="assets/images/characters/char-abigail-neutral.png" alt="Abigail with a neutral expression">
-        <img class="character character-right is-hidden" data-char="alex" src="assets/images/characters/char-alex-sad.png" alt="Alex with a sad expression">
-        <img class="item item-mid-left item-low item-small" src="assets/images/items/item-headphones.png" alt="Headphones">
-        <img class="item item-mid-right item-low item-small" src="assets/images/items/item-nodepad.png" alt="Notepad">
+                <section class="scene" id="park-scene" aria-hidden="true">
+                    <img
+                        class="scene-background"
+                        src="assets/images/scenes/scene-park.png"
+                        alt="Park scene at dusk"
+                    >
+                    <img
+                        class="character character-left is-hidden"
+                        data-char="abigail"
+                        src="assets/images/characters/char-abigail-neutral.png"
+                        alt="Abigail with a neutral expression"
+                    >
+                    <img
+                        class="character character-right is-hidden"
+                        data-char="alex"
+                        src="assets/images/characters/char-alex-sad.png"
+                        alt="Alex with a sad expression"
+                    >
+                    <img
+                        class="item item-mid-left item-low item-small"
+                        src="assets/images/items/item-headphones.png"
+                        alt="Headphones"
+                    >
+                    <img
+                        class="item item-mid-right item-low item-small"
+                        src="assets/images/items/item-nodepad.png"
+                        alt="Notepad"
+                    >
 
-        <div class="steps" aria-hidden="true">
-          <div data-step="run" data-action="playSceneTone"></div>
-          <div data-step="show" data-target='[data-char="abigail"]'></div>
-          <div data-step="show" data-target='[data-char="alex"]'></div>
-          <div data-step="say" data-character="alex" data-speaker="Alex">I dropped Jack's notepad, and now the headphones are tangled in the grass. If we arrive without them, the whole plan falls apart.</div>
-          <div data-step="wait-click"></div>
-          <div data-step="say" data-character="abigail" data-speaker="Abigail">We can stop and help, or leave right now and hope Jack can improvise.</div>
-          <div data-step="choice">
-            <button type="button" data-run="helpAlex" data-next="street-night-scene">Help Alex gather the things</button>
-            <button type="button" data-run="rushAhead" data-next="street-night-scene">Keep moving to the villa</button>
-          </div>
-        </div>
-      </section>
+                    <div class="steps" aria-hidden="true">
+                        <div data-step="run" data-action="playSceneTone"></div>
+                        <div data-step="show" data-target='[data-char="abigail"]'></div>
+                        <div data-step="show" data-target='[data-char="alex"]'></div>
+                        <div data-step="say" data-character="alex" data-speaker="Alex">
+                            I dropped Jack's notepad, and now the headphones are
+                            tangled in the grass. If we arrive without them, the
+                            whole plan falls apart.
+                        </div>
+                        <div data-step="wait-click"></div>
+                        <div data-step="say" data-character="abigail" data-speaker="Abigail">
+                            We can stop and help, or leave right now and hope
+                            Jack can improvise.
+                        </div>
+                        <div data-step="choice">
+                            <button type="button" data-run="helpAlex" data-next="street-night-scene">
+                                Help Alex gather the things
+                            </button>
+                            <button type="button" data-run="rushAhead" data-next="street-night-scene">
+                                Keep moving to the villa
+                            </button>
+                        </div>
+                    </div>
+                </section>
 
-      <section class="scene" id="street-night-scene" aria-hidden="true">
-        <img class="scene-background" src="assets/images/scenes/scene-street-night.png" alt="Street scene at night near the villa">
-        <img class="character character-left is-hidden" data-char="abigail" src="assets/images/characters/char-abigail-neutral.png" alt="Abigail with a neutral expression">
-        <img class="character character-right is-hidden" data-char="jack" src="assets/images/characters/char-jack-neutral.png" alt="Jack with a neutral expression">
-        <img class="item item-left item-low item-small" src="assets/images/items/item-phone.png" alt="Phone">
-        <img class="item item-right item-low item-small" src="assets/images/items/item-shoes.png" alt="Shoes">
+                <section class="scene" id="street-night-scene" aria-hidden="true">
+                    <img
+                        class="scene-background"
+                        src="assets/images/scenes/scene-street-night.png"
+                        alt="Street scene at night near the villa"
+                    >
+                    <img
+                        class="character character-left is-hidden"
+                        data-char="abigail"
+                        src="assets/images/characters/char-abigail-neutral.png"
+                        alt="Abigail with a neutral expression"
+                    >
+                    <img
+                        class="character character-right is-hidden"
+                        data-char="jack"
+                        src="assets/images/characters/char-jack-neutral.png"
+                        alt="Jack with a neutral expression"
+                    >
+                    <img
+                        class="item item-left item-low item-small"
+                        src="assets/images/items/item-phone.png"
+                        alt="Phone"
+                    >
+                    <img
+                        class="item item-right item-low item-small"
+                        src="assets/images/items/item-shoes.png"
+                        alt="Shoes"
+                    >
 
-        <div class="steps" aria-hidden="true">
-          <div data-step="show" data-target='[data-char="abigail"]'></div>
-          <div data-step="show" data-target='[data-char="jack"]'></div>
-          <div data-step="say" data-character="jack" data-speaker="Jack">Jessica just messaged me. The path into the garden is soaked, and she ruined her shoes on the way here.</div>
-          <div data-step="wait-click"></div>
-          <div data-step="say" data-character="abigail" data-speaker="Abigail">If I brought the backpack, there should be spare shoes inside. If Alex found the notepad, we can still run Jack's whole presentation.</div>
-          <div data-step="wait-click"></div>
-          <div data-step="run" data-action="checkEnding"></div>
-        </div>
-      </section>
+                    <div class="steps" aria-hidden="true">
+                        <div data-step="show" data-target='[data-char="abigail"]'></div>
+                        <div data-step="show" data-target='[data-char="jack"]'></div>
+                        <div data-step="say" data-character="jack" data-speaker="Jack">
+                            Jessica just messaged me. The path into the garden
+                            is soaked, and she ruined her shoes on the way here.
+                        </div>
+                        <div data-step="wait-click"></div>
+                        <div data-step="say" data-character="abigail" data-speaker="Abigail">
+                            If I brought the backpack, there should be spare
+                            shoes inside. If Alex found the notepad, we can
+                            still run Jack's whole presentation.
+                        </div>
+                        <div data-step="wait-click"></div>
+                        <div data-step="run" data-action="checkEnding"></div>
+                    </div>
+                </section>
 
-      <section class="scene" id="garden-good-ending-scene" aria-hidden="true">
-        <img class="scene-background" src="assets/images/scenes/scene-garden.png" alt="Garden scene at night">
-        <img class="character character-left character-small is-hidden" data-char="abigail" src="assets/images/characters/char-abigail-happy.png" alt="Abigail with a happy expression">
-        <img class="character character-mid-left character-small is-hidden" data-char="alex" src="assets/images/characters/char-alex-happy.png" alt="Alex with a happy expression">
-        <img class="character character-mid-right character-small is-hidden" data-char="jessica" src="assets/images/characters/char-jessica-happy.png" alt="Jessica with a happy expression">
-        <img class="character character-right character-small is-hidden" data-char="jack" src="assets/images/characters/char-jack-happy.png" alt="Jack with a happy expression">
-        <img class="item item-left item-low" src="assets/images/items/item-backpack.png" alt="Backpack">
-        <img class="item item-mid-left item-low item-small" src="assets/images/items/item-headphones.png" alt="Headphones">
-        <img class="item item-center item-high item-small" src="assets/images/items/item-mug.png" alt="Mug">
-        <img class="item item-mid-right item-low item-small" src="assets/images/items/item-nodepad.png" alt="Notepad">
+                <section class="scene" id="garden-good-ending-scene" aria-hidden="true">
+                    <img
+                        class="scene-background"
+                        src="assets/images/scenes/scene-garden.png"
+                        alt="Garden scene at night"
+                    >
+                    <img
+                        class="character character-left character-small is-hidden"
+                        data-char="abigail"
+                        src="assets/images/characters/char-abigail-happy.png"
+                        alt="Abigail with a happy expression"
+                    >
+                    <img
+                        class="character character-mid-left character-small is-hidden"
+                        data-char="alex"
+                        src="assets/images/characters/char-alex-happy.png"
+                        alt="Alex with a happy expression"
+                    >
+                    <img
+                        class="character character-mid-right character-small is-hidden"
+                        data-char="jessica"
+                        src="assets/images/characters/char-jessica-happy.png"
+                        alt="Jessica with a happy expression"
+                    >
+                    <img
+                        class="character character-right character-small is-hidden"
+                        data-char="jack"
+                        src="assets/images/characters/char-jack-happy.png"
+                        alt="Jack with a happy expression"
+                    >
+                    <img
+                        class="item item-left item-low"
+                        src="assets/images/items/item-backpack.png"
+                        alt="Backpack"
+                    >
+                    <img
+                        class="item item-mid-left item-low item-small"
+                        src="assets/images/items/item-headphones.png"
+                        alt="Headphones"
+                    >
+                    <img
+                        class="item item-center item-high item-small"
+                        src="assets/images/items/item-mug.png"
+                        alt="Mug"
+                    >
+                    <img
+                        class="item item-mid-right item-low item-small"
+                        src="assets/images/items/item-nodepad.png"
+                        alt="Notepad"
+                    >
 
-        <div class="steps" aria-hidden="true">
-          <div data-step="run" data-action="playEndingTone"></div>
-          <div data-step="show" data-target='[data-char="abigail"]'></div>
-          <div data-step="show" data-target='[data-char="alex"]'></div>
-          <div data-step="show" data-target='[data-char="jessica"]'></div>
-          <div data-step="show" data-target='[data-char="jack"]'></div>
-          <div data-step="say" data-character="jessica" data-speaker="Jessica">You packed the backpack and stopped for Alex. Now everyone is here, the notes survived, and my shoes have been replaced.</div>
-          <div data-step="wait-click"></div>
-          <div data-step="say" data-character="jack" data-speaker="Jack">That is the good ending. Small choices turned into a smooth night in the garden.</div>
-          <div data-step="choice">
-            <button type="button" data-run="restartStory" data-next="intro-scene">Play again</button>
-          </div>
-        </div>
-      </section>
+                    <div class="steps" aria-hidden="true">
+                        <div data-step="run" data-action="playEndingTone"></div>
+                        <div data-step="show" data-target='[data-char="abigail"]'></div>
+                        <div data-step="show" data-target='[data-char="alex"]'></div>
+                        <div data-step="show" data-target='[data-char="jessica"]'></div>
+                        <div data-step="show" data-target='[data-char="jack"]'></div>
+                        <div data-step="say" data-character="jessica" data-speaker="Jessica">
+                            You packed the backpack and stopped for Alex.
+                            Now everyone is here, the notes survived, and my
+                            shoes have been replaced.
+                        </div>
+                        <div data-step="wait-click"></div>
+                        <div data-step="say" data-character="jack" data-speaker="Jack">
+                            That is the good ending. Small choices turned into
+                            a smooth night in the garden.
+                        </div>
+                        <div data-step="choice">
+                            <button type="button" data-run="restartStory" data-next="intro-scene">
+                                Play again
+                            </button>
+                        </div>
+                    </div>
+                </section>
 
-      <section class="scene" id="garden-bad-ending-scene" aria-hidden="true">
-        <img class="scene-background" src="assets/images/scenes/scene-garden.png" alt="Garden scene at night">
-        <img class="character character-left character-small is-hidden" data-char="abigail" src="assets/images/characters/char-abigail-sad.png" alt="Abigail with a sad expression">
-        <img class="character character-mid-left character-small is-hidden" data-char="alex" src="assets/images/characters/char-alex-sad.png" alt="Alex with a sad expression">
-        <img class="character character-mid-right character-small is-hidden" data-char="jessica" src="assets/images/characters/char-jessica-sad.png" alt="Jessica with a sad expression">
-        <img class="character character-right character-small is-hidden" data-char="jack" src="assets/images/characters/char-jack-sad.png" alt="Jack with a sad expression">
-        <img class="item item-left item-low item-small" src="assets/images/items/item-phone.png" alt="Phone">
-        <img class="item item-right item-low item-small" src="assets/images/items/item-shoes.png" alt="Shoes">
+                <section class="scene" id="garden-bad-ending-scene" aria-hidden="true">
+                    <img
+                        class="scene-background"
+                        src="assets/images/scenes/scene-garden.png"
+                        alt="Garden scene at night"
+                    >
+                    <img
+                        class="character character-left character-small is-hidden"
+                        data-char="abigail"
+                        src="assets/images/characters/char-abigail-sad.png"
+                        alt="Abigail with a sad expression"
+                    >
+                    <img
+                        class="character character-mid-left character-small is-hidden"
+                        data-char="alex"
+                        src="assets/images/characters/char-alex-sad.png"
+                        alt="Alex with a sad expression"
+                    >
+                    <img
+                        class="character character-mid-right character-small is-hidden"
+                        data-char="jessica"
+                        src="assets/images/characters/char-jessica-sad.png"
+                        alt="Jessica with a sad expression"
+                    >
+                    <img
+                        class="character character-right character-small is-hidden"
+                        data-char="jack"
+                        src="assets/images/characters/char-jack-sad.png"
+                        alt="Jack with a sad expression"
+                    >
+                    <img
+                        class="item item-left item-low item-small"
+                        src="assets/images/items/item-phone.png"
+                        alt="Phone"
+                    >
+                    <img
+                        class="item item-right item-low item-small"
+                        src="assets/images/items/item-shoes.png"
+                        alt="Shoes"
+                    >
 
-        <div class="steps" aria-hidden="true">
-          <div data-step="run" data-action="playEndingTone"></div>
-          <div data-step="show" data-target='[data-char="abigail"]'></div>
-          <div data-step="show" data-target='[data-char="alex"]'></div>
-          <div data-step="show" data-target='[data-char="jessica"]'></div>
-          <div data-step="show" data-target='[data-char="jack"]'></div>
-          <div data-step="say" data-character="jack" data-speaker="Jack">We still made it to the garden, but the night feels scattered. Someone is missing a key item, and Jessica had to sit out half the plan.</div>
-          <div data-step="wait-click"></div>
-          <div data-step="say" data-character="abigail" data-speaker="Abigail">That is the rough ending. Try a different combination if you want everyone comfortable and fully prepared.</div>
-          <div data-step="choice">
-            <button type="button" data-run="restartStory" data-next="intro-scene">Play again</button>
-          </div>
-        </div>
-      </section>
+                    <div class="steps" aria-hidden="true">
+                        <div data-step="run" data-action="playEndingTone"></div>
+                        <div data-step="show" data-target='[data-char="abigail"]'></div>
+                        <div data-step="show" data-target='[data-char="alex"]'></div>
+                        <div data-step="show" data-target='[data-char="jessica"]'></div>
+                        <div data-step="show" data-target='[data-char="jack"]'></div>
+                        <div data-step="say" data-character="jack" data-speaker="Jack">
+                            We still made it to the garden, but the night feels
+                            scattered. Someone is missing a key item, and
+                            Jessica had to sit out half the plan.
+                        </div>
+                        <div data-step="wait-click"></div>
+                        <div data-step="say" data-character="abigail" data-speaker="Abigail">
+                            That is the rough ending. Try a different
+                            combination if you want everyone comfortable and
+                            fully prepared.
+                        </div>
+                        <div data-step="choice">
+                            <button type="button" data-run="restartStory" data-next="intro-scene">
+                                Play again
+                            </button>
+                        </div>
+                    </div>
+                </section>
 
-        <details class="debug-panel">
-          <summary>Debug</summary>
-          <div class="debug-content">
-            <h2>Live state</h2>
-            <p class="debug-line"><strong>Current scene:</strong> <span id="debug-scene">none</span></p>
-            <pre id="state-output">{}</pre>
-          </div>
-        </details>
+                <details class="debug-panel">
+                    <summary>Debug</summary>
+                    <div class="debug-content">
+                        <h2>Live state</h2>
+                        <p class="debug-line">
+                            <strong>Current scene:</strong> <span id="debug-scene">none</span>
+                        </p>
+                        <pre id="state-output">{}</pre>
+                    </div>
+                </details>
 
-        <section class="dialog-panel" aria-live="polite">
-          <p class="speaker-label" id="speaker-name">Narrator</p>
-          <p class="dialog-text" id="dialog-text">The example story is loading.</p>
-          <div class="dialog-actions">
-            <button class="primary-button is-hidden" id="continue-button" type="button">Continue</button>
-          </div>
-          <div class="choice-list" id="choice-list" aria-label="Available choices"></div>
+                <section class="dialog-panel" aria-live="polite">
+                    <p class="speaker-label" id="speaker-name">
+                        Narrator
+                    </p>
+                    <p class="dialog-text" id="dialog-text">
+                        The example story is loading.
+                    </p>
+                    <div class="dialog-actions">
+                        <button class="primary-button is-hidden" id="continue-button" type="button">
+                            Continue
+                        </button>
+                    </div>
+                    <div class="choice-list" id="choice-list" aria-label="Available choices"></div>
+                </section>
+            </section>
         </section>
-      </section>
-    </section>
-  </main>
+    </main>
 
-  <audio id="sound-lab" preload="auto" src="assets/audio/lab-tone.wav"></audio>
-  <audio id="sound-ending" preload="auto" src="assets/audio/ending-tone.wav"></audio>
+    <audio id="sound-lab" preload="auto" src="assets/audio/lab-tone.wav"></audio>
+    <audio id="sound-ending" preload="auto" src="assets/audio/ending-tone.wav"></audio>
 
-  <script src="scripts/engine.js"></script>
-  <script src="scripts/story.js"></script>
+    <script src="scripts/engine.js"></script>
+    <script src="scripts/story.js"></script>
 </body>
 </html>
