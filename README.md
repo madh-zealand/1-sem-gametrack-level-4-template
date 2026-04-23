@@ -23,7 +23,7 @@ It is intentionally simple:
 - `say`: update the dialog box and active character
 - `show`: show an element in the current scene
 - `hide`: hide an element in the current scene
-- `swap-image`: fade out an image, change its `src`, and fade it back in
+- `swap-image`: fade out an image, change its `src`, and fade it back in; swap targets are preloaded on startup
 - `run`: call a JavaScript action
 - `goto`: switch to another scene
 - `wait-click`: pause until the player presses Continue

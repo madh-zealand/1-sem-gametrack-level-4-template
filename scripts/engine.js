@@ -15,6 +15,7 @@
     this.stepIndex = 0;
     this.flowToken = 0;
     this.waitingForClick = false;
+    this.imageCache = {};
 
     this.handleContinueClick = this.handleContinueClick.bind(this);
     this.continueButton.addEventListener("click", this.handleContinueClick);
@@ -31,7 +32,41 @@
   };
 
   VisualNovelEngine.prototype.start = function () {
+    this.preloadImages();
     this.goTo(this.startSceneId);
+  };
+
+  VisualNovelEngine.prototype.preloadImage = function (src) {
+    var preload;
+
+    if (!src) {
+      return null;
+    }
+
+    if (this.imageCache[src]) {
+      return this.imageCache[src];
+    }
+
+    preload = new window.Image();
+    preload.src = src;
+    this.imageCache[src] = preload;
+    return preload;
+  };
+
+  VisualNovelEngine.prototype.preloadImages = function () {
+    var engine = this;
+
+    if (!this.root) {
+      return;
+    }
+
+    this.root.querySelectorAll("img[src]").forEach(function (image) {
+      engine.preloadImage(image.getAttribute("src"));
+    });
+
+    this.root.querySelectorAll('[data-step="swap-image"][data-src]').forEach(function (step) {
+      engine.preloadImage(step.dataset.src);
+    });
   };
 
   VisualNovelEngine.prototype.resetState = function () {
@@ -103,13 +138,12 @@
     var engine = this;
     var fadeDuration = Number(duration || 220);
     var halfDuration = Math.max(Math.round(fadeDuration / 2), 1);
-    var preload = new window.Image();
+    var preload = this.preloadImage(src);
 
     if (!element || element.tagName !== "IMG") {
       return false;
     }
 
-    preload.src = src;
     element.classList.add("is-swapping");
 
     window.setTimeout(function () {
