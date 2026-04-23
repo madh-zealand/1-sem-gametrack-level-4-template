@@ -94,6 +94,59 @@
     }
   };
 
+  VisualNovelEngine.prototype.swapImage = function (selector, src, token, duration) {
+    if (!this.currentScene || !src) {
+      return false;
+    }
+
+    var element = this.currentScene.querySelector(selector);
+    var engine = this;
+    var fadeDuration = Number(duration || 220);
+    var halfDuration = Math.max(Math.round(fadeDuration / 2), 1);
+    var preload = new window.Image();
+
+    if (!element || element.tagName !== "IMG") {
+      return false;
+    }
+
+    preload.src = src;
+    element.classList.add("is-swapping");
+
+    window.setTimeout(function () {
+      if (token !== engine.flowToken) {
+        return;
+      }
+
+      element.src = src;
+
+      function finishSwap() {
+        if (token !== engine.flowToken) {
+          return;
+        }
+
+        window.requestAnimationFrame(function () {
+          element.classList.remove("is-swapping");
+
+          window.setTimeout(function () {
+            if (token === engine.flowToken) {
+              engine.continueScene(token);
+            }
+          }, halfDuration);
+        });
+      }
+
+      if (preload.complete) {
+        finishSwap();
+        return;
+      }
+
+      preload.onload = finishSwap;
+      preload.onerror = finishSwap;
+    }, halfDuration);
+
+    return true;
+  };
+
   VisualNovelEngine.prototype.updateDebugPanel = function () {
     this.debugScene.textContent = this.currentScene ? this.currentScene.id : "none";
     this.stateOutput.textContent = JSON.stringify(this.state, null, 2);
@@ -172,6 +225,14 @@
 
     if (stepType === "hide") {
       this.hideElement(step.dataset.target);
+      return "continue";
+    }
+
+    if (stepType === "swap-image") {
+      if (this.swapImage(step.dataset.target, step.dataset.src, token, step.dataset.duration)) {
+        return "pause";
+      }
+
       return "continue";
     }
 

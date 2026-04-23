@@ -23,6 +23,7 @@ It is intentionally simple:
 - `say`: update the dialog box and active character
 - `show`: show an element in the current scene
 - `hide`: hide an element in the current scene
+- `swap-image`: fade out an image, change its `src`, and fade it back in
 - `run`: call a JavaScript action
 - `goto`: switch to another scene
 - `wait-click`: pause until the player presses Continue
@@ -38,6 +39,12 @@ It is intentionally simple:
 
   <div class="steps">
     <div data-step="show" data-target='[data-char="ava"]'></div>
+    <div
+      data-step="swap-image"
+      data-target='[data-char="ava"]'
+      data-src="assets/images/characters/char-ava-happy.png"
+      data-duration="220"
+    ></div>
     <div data-step="say" data-character="ava" data-speaker="Ava">
       The radio should be silent by now.
     </div>
