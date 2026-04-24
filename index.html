@@ -44,18 +44,34 @@
                     <div class="steps">
                         <div data-step="show" data-target='[data-char="abigail"]'></div>
                         <div data-step="show" data-target='[data-char="jessica"]'></div>
-                        <div data-step="say" data-character="abigail" data-speaker="Abigail">
+                        <div data-step="focus" data-target='[data-char="abigail"]'></div>
+                        <div data-step="say" data-speaker="Abigail" data-color="#79b8f9">
                             Jack invited us to a late-night idea session in the
                             villa garden. We only have a few minutes to get
                             ready.
                         </div>
                         <div data-step="wait-click"></div>
+                        <div data-step="focus" data-target=''></div>
+                        <div data-step="say" data-color="#b9b9b9">
+                            What is happening now?!
+                        </div>
                         <div
                             data-step="swap-image"
                             data-target='[data-char="jessica"]'
                             data-src="assets/images/characters/char-jessica-neutral.png"
                         ></div>
-                        <div data-step="say" data-character="jessica" data-speaker="Jessica">
+                        <div data-step="wait-click"></div>
+                        <div data-step="focus" data-target='[data-char="jessica"]'></div>
+                        <div data-step="say" data-speaker="Jessica" data-color="#8b5cf6">
+                            Oh no...
+                        </div>
+                        <div
+                            data-step="swap-image"
+                            data-target='[data-char="jessica"]'
+                            data-src="assets/images/characters/char-jessica-sad.png"
+                        ></div>
+                        <div data-step="focus" data-target='[data-char="jessica"]'></div>
+                        <div data-step="say" data-speaker="Jessica" data-color="#8b5cf6">
                             Bring the backpack if you want to play hero later.
                             Or take only your phone and travel light.
                         </div>
@@ -100,13 +116,15 @@
                         <div data-step="run" data-action="playSceneTone"></div>
                         <div data-step="show" data-target='[data-char="abigail"]'></div>
                         <div data-step="show" data-target='[data-char="alex"]'></div>
-                        <div data-step="say" data-character="alex" data-speaker="Alex">
+                        <div data-step="focus" data-target='[data-char="alex"]'></div>
+                        <div data-step="say" data-speaker="Alex" data-color="#bdf9ac">
                             I dropped Jack's notepad, and now the headphones are
                             tangled in the grass. If we arrive without them, the
                             whole plan falls apart.
                         </div>
                         <div data-step="wait-click"></div>
-                        <div data-step="say" data-character="abigail" data-speaker="Abigail">
+                        <div data-step="focus" data-target='[data-char="abigail"]'></div>
+                        <div data-step="say" data-speaker="Abigail" data-color="#79b8f9">
                             We can stop and help, or leave right now and hope
                             Jack can improvise.
                         </div>
@@ -150,12 +168,14 @@
                     <div class="steps">
                         <div data-step="show" data-target='[data-char="abigail"]'></div>
                         <div data-step="show" data-target='[data-char="jack"]'></div>
-                        <div data-step="say" data-character="jack" data-speaker="Jack">
+                        <div data-step="focus" data-target='[data-char="jack"]'></div>
+                        <div data-step="say" data-speaker="Jack" data-color="#f9bcac">
                             Jessica just messaged me. The path into the garden
                             is soaked, and she ruined her shoes on the way here.
                         </div>
                         <div data-step="wait-click"></div>
-                        <div data-step="say" data-character="abigail" data-speaker="Abigail">
+                        <div data-step="focus" data-target='[data-char="abigail"]'></div>
+                        <div data-step="say" data-speaker="Abigail" data-color="#79b8f9">
                             If I brought the backpack, there should be spare
                             shoes inside. If Alex found the notepad, we can
                             still run Jack's whole presentation.
@@ -217,13 +237,15 @@
                         <div data-step="show" data-target='[data-char="alex"]'></div>
                         <div data-step="show" data-target='[data-char="jessica"]'></div>
                         <div data-step="show" data-target='[data-char="jack"]'></div>
-                        <div data-step="say" data-character="jessica" data-speaker="Jessica">
+                        <div data-step="focus" data-target='[data-char="jessica"]'></div>
+                        <div data-step="say" data-speaker="Jessica" data-color="#8b5cf6">
                             You packed the backpack and stopped for Alex.
                             Now everyone is here, the notes survived, and my
                             shoes have been replaced.
                         </div>
                         <div data-step="wait-click"></div>
-                        <div data-step="say" data-character="jack" data-speaker="Jack">
+                        <div data-step="focus" data-target='[data-char="jack"]'></div>
+                        <div data-step="say" data-speaker="Jack" data-color="#f9bcac">
                             That is the good ending. Small choices turned into
                             a smooth night in the garden.
                         </div>
@@ -277,13 +299,15 @@
                         <div data-step="show" data-target='[data-char="alex"]'></div>
                         <div data-step="show" data-target='[data-char="jessica"]'></div>
                         <div data-step="show" data-target='[data-char="jack"]'></div>
-                        <div data-step="say" data-character="jack" data-speaker="Jack">
+                        <div data-step="focus" data-target='[data-char="jack"]'></div>
+                        <div data-step="say" data-speaker="Jack" data-color="#f9bcac">
                             We still made it to the garden, but the night feels
                             scattered. Someone is missing a key item, and
                             Jessica had to sit out half the plan.
                         </div>
                         <div data-step="wait-click"></div>
-                        <div data-step="say" data-character="abigail" data-speaker="Abigail">
+                        <div data-step="focus" data-target='[data-char="abigail"]'></div>
+                        <div data-step="say" data-speaker="Abigail" data-color="#79b8f9">
                             That is the rough ending. Try a different
                             combination if you want everyone comfortable and
                             fully prepared.

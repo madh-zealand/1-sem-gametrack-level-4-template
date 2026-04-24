@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var engine = new window.VisualNovelEngine({
     startSceneId: "intro-scene",
     root: document.querySelector(".stage-screen"),
+    dialogPanel: document.querySelector(".dialog-panel"),
     dialogText: document.getElementById("dialog-text"),
     speakerName: document.getElementById("speaker-name"),
     choiceList: document.getElementById("choice-list"),

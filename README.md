@@ -20,10 +20,11 @@ It is intentionally simple:
 
 ## Supported step types
 
-- `say`: update the dialog box and active character
+- `say`: update the dialog box text and speaker label; optional `data-color="#hex"` rethemes the dialog box for that line
+- `focus`: mark one character as active using `data-target`; use an empty target to clear focus
 - `show`: show an element in the current scene
 - `hide`: hide an element in the current scene
-- `swap-image`: fade out an image, change its `src`, and fade it back in; swap targets are preloaded on startup
+- `swap-image`: crossfade from the current image to a new `src`; swap targets are preloaded on startup
 - `run`: call a JavaScript action
 - `goto`: switch to another scene
 - `wait-click`: pause until the player presses Continue
@@ -39,15 +40,17 @@ It is intentionally simple:
 
   <div class="steps">
     <div data-step="show" data-target='[data-char="ava"]'></div>
+    <div data-step="focus" data-target='[data-char="ava"]'></div>
     <div
       data-step="swap-image"
       data-target='[data-char="ava"]'
       data-src="assets/images/characters/char-ava-happy.png"
       data-duration="220"
     ></div>
-    <div data-step="say" data-character="ava" data-speaker="Ava">
+    <div data-step="say" data-speaker="Ava" data-color="#d96d3f">
       The radio should be silent by now.
     </div>
+    <div data-step="focus" data-target=""></div>
     <div data-step="wait-click"></div>
     <div data-step="choice">
       <button type="button" data-run="chooseSignal" data-next="lab-scene">Trace the signal</button>

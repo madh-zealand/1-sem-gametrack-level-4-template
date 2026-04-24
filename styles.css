@@ -130,7 +130,9 @@ h2 {
   z-index: 1;
   object-fit: contain;
   filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.10)) brightness(0.9) saturate(0.9);
+  opacity: 1;
   transition:
+    opacity 200ms ease,
     transform 200ms ease,
     filter 200ms ease;
 }
@@ -165,6 +167,10 @@ h2 {
 .character.is-swapping,
 .item.is-swapping {
   opacity: 0 !important;
+}
+
+.is-swap-clone {
+  pointer-events: none;
 }
 
 #intro-scene {
@@ -372,25 +378,31 @@ h2 {
 }
 
 .dialog-panel {
+  --dialog-border-color: var(--panel-border);
+  --dialog-bg-top: rgba(249, 244, 236, 0.94);
+  --dialog-bg-bottom: rgba(242, 233, 219, 0.96);
+  --speaker-bg: rgba(217, 109, 63, 0.12);
+  --speaker-text: var(--accent-dark);
   position: relative;
   width: 100%;
   min-height: 148px;
   display: grid;
   align-content: start;
   gap: 0.75rem;
-  background: linear-gradient(180deg, rgba(249, 244, 236, 0.94), rgba(242, 233, 219, 0.96));
+  border-color: var(--dialog-border-color);
+  background: linear-gradient(180deg, var(--dialog-bg-top), var(--dialog-bg-bottom));
 }
 
 .speaker-label {
   width: fit-content;
   padding: 0.35rem 0.65rem;
   border-radius: 999px;
-  background: rgba(217, 109, 63, 0.12);
+  background: var(--speaker-bg);
   font-size: 0.95rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--accent-dark);
+  color: var(--speaker-text);
 }
 
 .dialog-text {
