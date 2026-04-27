@@ -8,22 +8,22 @@ import { VisualNovelEngine } from './engine.js';
  * stats, clues, items, or which conversations already happened.
  */
 const storyInitialState = {
-  trust: 0,
-  focus: 0,
-  courage: 0,
-  hasNotepad: false,
-  hasHeadphones: false,
-  hasPhone: false,
-  hasShoes: false,
+  statTrust: 0,
+  statFocus: 0,
+  statCourage: 0,
+  itemHasNotepad: false,
+  itemHasHeadphones: false,
+  itemHasPhone: false,
+  itemHasShoes: false,
   talkedToAbigail: false,
   talkedToAlex: false,
   talkedToJack: false,
   talkedToJessica: false,
-  foundGardenClue: false,
-  foundPhoneMessage: false,
-  accusedSomeone: false,
-  checkedBackpack: false,
-  ending: /** @type {'good' | 'bad' | null} */ (null),
+  clueFoundGarden: false,
+  clueFoundPhoneMessage: false,
+  storyAccusedSomeone: false,
+  storyCheckedBackpack: false,
+  storyEnding: /** @type {'good' | 'bad' | null} */ (null),
 };
 
 /**
@@ -53,7 +53,7 @@ const storyConditions = {
    * @returns {boolean}
    */
   shouldShowPhone(game) {
-    return !game.state.foundPhoneMessage;
+    return !game.state.clueFoundPhoneMessage;
   },
 
   /**
@@ -61,7 +61,7 @@ const storyConditions = {
    * @returns {boolean}
    */
   shouldShowMug(game) {
-    return !game.state.foundGardenClue;
+    return !game.state.clueFoundGarden;
   },
 
   /**
@@ -69,7 +69,7 @@ const storyConditions = {
    * @returns {boolean}
    */
   shouldShowBackpack(game) {
-    return !game.state.checkedBackpack;
+    return !game.state.storyCheckedBackpack;
   },
 
   /**
@@ -77,7 +77,7 @@ const storyConditions = {
    * @returns {boolean}
    */
   shouldShowHeadphones(game) {
-    return !game.state.hasHeadphones;
+    return !game.state.itemHasHeadphones;
   },
 
   /**
@@ -85,7 +85,7 @@ const storyConditions = {
    * @returns {boolean}
    */
   shouldShowShoes(game) {
-    return !game.state.hasShoes;
+    return !game.state.itemHasShoes;
   },
 
   /**
@@ -93,7 +93,7 @@ const storyConditions = {
    * @returns {boolean}
    */
   shouldShowNotepad(game) {
-    return !game.state.hasNotepad;
+    return !game.state.itemHasNotepad;
   },
 
   /**
@@ -101,7 +101,7 @@ const storyConditions = {
    * @returns {boolean}
    */
   canLeaveLivingRoom(game) {
-    return game.state.foundGardenClue || game.state.focus >= 2;
+    return game.state.clueFoundGarden || game.state.statFocus >= 2;
   },
 
   /**
@@ -109,7 +109,7 @@ const storyConditions = {
    * @returns {boolean}
    */
   canGoToPark(game) {
-    return game.state.talkedToJessica && game.state.hasHeadphones;
+    return game.state.talkedToJessica && game.state.itemHasHeadphones;
   },
 
   /**
@@ -117,7 +117,7 @@ const storyConditions = {
    * @returns {boolean}
    */
   canOfferSupportChoice(game) {
-    return game.state.hasNotepad && game.state.trust >= 2;
+    return game.state.itemHasNotepad && game.state.statTrust >= 2;
   },
 
   /**
@@ -125,7 +125,7 @@ const storyConditions = {
    * @returns {boolean}
    */
   foundPhoneMessage(game) {
-    return game.state.foundPhoneMessage;
+    return game.state.clueFoundPhoneMessage;
   },
 
   /**
@@ -133,7 +133,7 @@ const storyConditions = {
    * @returns {boolean}
    */
   blamedSomeone(game) {
-    return game.state.accusedSomeone;
+    return game.state.storyAccusedSomeone;
   },
 
   /**
@@ -141,7 +141,7 @@ const storyConditions = {
    * @returns {boolean}
    */
   stayedFocused(game) {
-    return game.state.focus >= 3;
+    return game.state.statFocus >= 3;
   },
 
   /**
@@ -149,7 +149,7 @@ const storyConditions = {
    * @returns {boolean}
    */
   builtTrust(game) {
-    return game.state.trust >= 2;
+    return game.state.statTrust >= 2;
   },
 };
 
@@ -175,7 +175,7 @@ const storyActions = {
    */
   encourageAbigail(game) {
     game.setState({
-      trust: game.state.trust + 1,
+      statTrust: game.state.statTrust + 1,
       talkedToAbigail: true,
     });
   },
@@ -186,8 +186,8 @@ const storyActions = {
    */
   doubtAbigail(game) {
     game.setState({
-      trust: game.state.trust - 1,
-      accusedSomeone: true,
+      statTrust: game.state.statTrust - 1,
+      storyAccusedSomeone: true,
     });
   },
 
@@ -197,7 +197,7 @@ const storyActions = {
    */
   startRoomSearch(game) {
     game.setState({
-      focus: game.state.focus + 1,
+      statFocus: game.state.statFocus + 1,
     });
   },
 
@@ -210,7 +210,7 @@ const storyActions = {
       talkedToAbigail: true,
     });
 
-    if (game.state.trust < 0) {
+    if (game.state.statTrust < 0) {
       game.setDialog(
         'Abigail',
         'Jeg prøver virkelig at huske det hele. Jeg har bare brug for, at vi holder hovedet koldt.',
@@ -235,7 +235,7 @@ const storyActions = {
       talkedToAlex: true,
     });
 
-    if (game.state.trust < 0) {
+    if (game.state.statTrust < 0) {
       game.setDialog(
         'Alex',
         'Hvis vi bruger energien på at pege fingre, mister vi endnu mere tid. Kig efter faktiske spor.',
@@ -256,7 +256,7 @@ const storyActions = {
    * @returns {void}
    */
   inspectBackpack(game) {
-    if (game.state.checkedBackpack) {
+    if (game.state.storyCheckedBackpack) {
       game.setDialog(
         'Alex',
         'Du har allerede kigget i tasken. Notesbogen var der ikke.',
@@ -266,11 +266,11 @@ const storyActions = {
     }
 
     game.setState({
-      checkedBackpack: true,
-      focus: game.state.focus + 1,
+      storyCheckedBackpack: true,
+      statFocus: game.state.statFocus + 1,
     });
 
-    if (game.state.trust < 0) {
+    if (game.state.statTrust < 0) {
       game.setDialog(
         'Alex',
         'Det er min taske. Kig bare, men Abigail lagde notesbogen på bordet længe efter, jeg pakkede ud.',
@@ -291,7 +291,7 @@ const storyActions = {
    * @returns {void}
    */
   inspectPhone(game) {
-    if (game.state.foundPhoneMessage) {
+    if (game.state.clueFoundPhoneMessage) {
       game.setDialog(
         'Abigail',
         'Det er stadig Jacks telefon. Beskeden på skærmen gør mig ikke mindre nysgerrig.',
@@ -301,9 +301,9 @@ const storyActions = {
     }
 
     game.setState({
-      hasPhone: true,
-      foundPhoneMessage: true,
-      focus: game.state.focus + 1,
+      itemHasPhone: true,
+      clueFoundPhoneMessage: true,
+      statFocus: game.state.statFocus + 1,
     });
     game.setDialog(
       'Abigail',
@@ -317,7 +317,7 @@ const storyActions = {
    * @returns {void}
    */
   inspectMug(game) {
-    if (game.state.foundGardenClue) {
+    if (game.state.clueFoundGarden) {
       game.setDialog(
         'Alex',
         'Jorden på koppen peger stadig mod haven. Det er nok vores bedste spor lige nu.',
@@ -327,8 +327,8 @@ const storyActions = {
     }
 
     game.setState({
-      foundGardenClue: true,
-      focus: game.state.focus + 1,
+      clueFoundGarden: true,
+      statFocus: game.state.statFocus + 1,
     });
     game.setDialog(
       'Alex',
@@ -342,7 +342,7 @@ const storyActions = {
    * @returns {string | void}
    */
   goToGarden(game) {
-    if (game.state.foundGardenClue || game.state.focus >= 2) {
+    if (game.state.clueFoundGarden || game.state.statFocus >= 2) {
       return 'garden-scene';
     }
 
@@ -362,7 +362,7 @@ const storyActions = {
 
     game.setState({
       talkedToJessica: true,
-      focus: isFirstTime ? game.state.focus + 1 : game.state.focus,
+      statFocus: isFirstTime ? game.state.statFocus + 1 : game.state.statFocus,
     });
     game.setDialog(
       'Jessica',
@@ -377,7 +377,7 @@ const storyActions = {
    */
   challengeJessica(game) {
     game.setState({
-      trust: game.state.trust - 1,
+      statTrust: game.state.statTrust - 1,
     });
     game.setDialog(
       'Jessica',
@@ -394,7 +394,7 @@ const storyActions = {
     const isFirstTime = !game.state.talkedToJessica;
 
     game.setState({
-      trust: isFirstTime ? game.state.trust + 1 : game.state.trust,
+      statTrust: isFirstTime ? game.state.statTrust + 1 : game.state.statTrust,
       talkedToJessica: true,
     });
     game.setDialog(
@@ -409,7 +409,7 @@ const storyActions = {
    * @returns {void}
    */
   inspectHeadphones(game) {
-    if (game.state.hasHeadphones) {
+    if (game.state.itemHasHeadphones) {
       game.setDialog(
         'Jessica',
         'Headphonesene er allerede fundet. De gør det ret tydeligt, at Jack har været her.',
@@ -419,8 +419,8 @@ const storyActions = {
     }
 
     game.setState({
-      hasHeadphones: true,
-      focus: game.state.focus + 1,
+      itemHasHeadphones: true,
+      statFocus: game.state.statFocus + 1,
     });
     game.setDialog(
       'Jessica',
@@ -434,7 +434,7 @@ const storyActions = {
    * @returns {void}
    */
   inspectShoes(game) {
-    if (game.state.hasShoes) {
+    if (game.state.itemHasShoes) {
       game.setDialog(
         'Abigail',
         'Skoene er stadig mudrede. Nogen er gået ud og ind flere gange i aften.',
@@ -444,7 +444,7 @@ const storyActions = {
     }
 
     game.setState({
-      hasShoes: true,
+      itemHasShoes: true,
     });
     game.setDialog(
       'Abigail',
@@ -458,7 +458,7 @@ const storyActions = {
    * @returns {string | void}
    */
   goToPark(game) {
-    if (game.state.talkedToJessica && game.state.hasHeadphones) {
+    if (game.state.talkedToJessica && game.state.itemHasHeadphones) {
       return 'park-scene';
     }
 
@@ -474,7 +474,7 @@ const storyActions = {
    * @returns {void}
    */
   inspectNotepad(game) {
-    if (game.state.hasNotepad) {
+    if (game.state.itemHasNotepad) {
       game.setDialog(
         'Alex',
         'Notesbogen er allerede fundet. Nu handler det om, hvad vi gør bagefter.',
@@ -484,7 +484,7 @@ const storyActions = {
     }
 
     game.setState({
-      hasNotepad: true,
+      itemHasNotepad: true,
     });
     game.setDialog(
       'Abigail',
@@ -498,7 +498,7 @@ const storyActions = {
    * @returns {string | void}
    */
   confrontJack(game) {
-    if (!game.state.hasNotepad) {
+    if (!game.state.itemHasNotepad) {
       game.setDialog(
         'Jack',
         'Jeg forklarer det hele, men find notesbogen først. Den blæste ned ved bænken.',
@@ -509,8 +509,8 @@ const storyActions = {
 
     game.setState({
       talkedToJack: true,
-      courage: game.state.courage + 1,
-      trust: game.state.trust - 1,
+      statCourage: game.state.statCourage + 1,
+      statTrust: game.state.statTrust - 1,
     });
     return 'street-night-scene';
   },
@@ -520,7 +520,7 @@ const storyActions = {
    * @returns {string | void}
    */
   stayCalmWithJack(game) {
-    if (!game.state.hasNotepad) {
+    if (!game.state.itemHasNotepad) {
       game.setDialog(
         'Jack',
         'Jeg mistede den i vinden. Kig ved bænken først, så forklarer jeg resten.',
@@ -531,8 +531,8 @@ const storyActions = {
 
     game.setState({
       talkedToJack: true,
-      focus: game.state.focus + 1,
-      trust: game.state.trust + 1,
+      statFocus: game.state.statFocus + 1,
+      statTrust: game.state.statTrust + 1,
     });
     return 'street-night-scene';
   },
@@ -542,7 +542,7 @@ const storyActions = {
    * @returns {string | void}
    */
   accuseJack(game) {
-    if (!game.state.hasNotepad) {
+    if (!game.state.itemHasNotepad) {
       game.setDialog(
         'Jack',
         'Skæld mig ud bagefter, men hjælp mig lige med at finde den først.',
@@ -553,8 +553,8 @@ const storyActions = {
 
     game.setState({
       talkedToJack: true,
-      accusedSomeone: true,
-      trust: game.state.trust - 2,
+      storyAccusedSomeone: true,
+      statTrust: game.state.statTrust - 2,
     });
     return 'street-night-scene';
   },
@@ -564,7 +564,7 @@ const storyActions = {
    * @returns {string | void}
    */
   supportTheGroup(game) {
-    if (!game.state.hasNotepad) {
+    if (!game.state.itemHasNotepad) {
       game.setDialog(
         'Alex',
         'Hvis vi skal samle gruppen, skal vi først samle selve notesbogen op.',
@@ -575,8 +575,8 @@ const storyActions = {
 
     game.setState({
       talkedToJack: true,
-      trust: game.state.trust + 1,
-      focus: game.state.focus + 1,
+      statTrust: game.state.statTrust + 1,
+      statFocus: game.state.statFocus + 1,
     });
     return 'street-night-scene';
   },
@@ -587,13 +587,13 @@ const storyActions = {
    */
   resolveEnding(game) {
     const isGoodEnding =
-      game.state.hasNotepad &&
-      game.state.trust >= 2 &&
-      game.state.focus >= 3;
+      game.state.itemHasNotepad &&
+      game.state.statTrust >= 2 &&
+      game.state.statFocus >= 3;
 
     game.stopAllAudio();
     game.setState({
-      ending: isGoodEnding ? 'good' : 'bad',
+      storyEnding: isGoodEnding ? 'good' : 'bad',
     });
 
     return isGoodEnding ? 'ending-good-scene' : 'ending-bad-scene';
