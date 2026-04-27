@@ -1,20 +1,64 @@
-(function () {
-  const GOOD_ENDING_SCENE_ID = "garden-good-ending-scene";
-  const BAD_ENDING_SCENE_ID = "garden-bad-ending-scene";
+// @ts-check
+
+import { VisualNovelEngine } from "./engine.js";
+
+  /**
+   * Single source of truth for story-specific state fields.
+   */
+  const storyInitialState = {
+    broughtBackpack: false,
+    travelStyle: /** @type {string | null} */ (null),
+    helpedAlex: false,
+    recoveredNotepad: false,
+    pickedUpMug: false,
+    ending: /** @type {string | null} */ (null)
+  };
+
+  /**
+   * @typedef {typeof storyInitialState} StoryState
+   */
+
+  /**
+   * @typedef {Omit<import("./engine.js").VisualNovelEngine, "initialState" | "state" | "setState" | "resetState"> & {
+   *   initialState: StoryState,
+   *   state: StoryState,
+   *   setState: (updates?: Partial<StoryState>) => StoryState,
+   *   resetState: () => StoryState
+   * }} StoryEngine
+   */
+
+  /**
+   * @typedef {(game: StoryEngine, details: import("./engine.js").EngineActionDetails) => (string | void | null)} StoryAction
+   * @typedef {(game: StoryEngine, context: import("./engine.js").EngineConditionContext) => boolean} StoryCondition
+   */
 
   // Add more story-specific helpers and actions here as the game grows.
+  /** @type {Record<string, StoryCondition>} */
   const storyConditions = {
+    /**
+     * @param {StoryEngine} game
+     * @returns {boolean}
+     */
     shouldShowMug(game) {
       return !game.state.pickedUpMug;
     }
   };
 
+  /** @type {Record<string, StoryAction>} */
   const storyActions = {
+    /**
+     * @param {StoryEngine} game
+     * @returns {void}
+     */
     restartStory(game) {
       game.stopAllAudio();
       game.resetState();
     },
 
+    /**
+     * @param {StoryEngine} game
+     * @returns {void}
+     */
     packBackpack(game) {
       game.setState({
         broughtBackpack: true,
@@ -22,6 +66,10 @@
       });
     },
 
+    /**
+     * @param {StoryEngine} game
+     * @returns {void}
+     */
     travelLight(game) {
       game.setState({
         broughtBackpack: false,
@@ -29,6 +77,10 @@
       });
     },
 
+    /**
+     * @param {StoryEngine} game
+     * @returns {void}
+     */
     helpAlex(game) {
       game.setState({
         helpedAlex: true,
@@ -36,6 +88,10 @@
       });
     },
 
+    /**
+     * @param {StoryEngine} game
+     * @returns {void}
+     */
     rushAhead(game) {
       game.setState({
         helpedAlex: false,
@@ -43,6 +99,10 @@
       });
     },
 
+    /**
+     * @param {StoryEngine} game
+     * @returns {void}
+     */
     pickUpMug(game) {
       if (game.state.pickedUpMug) {
         return;
@@ -54,39 +114,43 @@
       game.setDialog("Abigail", "I should bring the mug too.", "#79b8f9");
     },
 
+    /**
+     * @param {StoryEngine} game
+     * @returns {string}
+     */
     checkEnding(game) {
       const endingSceneId = game.state.broughtBackpack && game.state.helpedAlex
-          ? GOOD_ENDING_SCENE_ID
-          : BAD_ENDING_SCENE_ID;
+          ? "garden-good-ending-scene"
+          : "garden-bad-ending-scene";
 
       game.stopAllAudio();
       game.setState({
-        ending: endingSceneId === GOOD_ENDING_SCENE_ID ? "good" : "rough"
+        ending: endingSceneId === "garden-good-ending-scene" ? "good" : "rough"
       });
 
       return endingSceneId;
     },
 
+    /**
+     * @param {StoryEngine} game
+     * @returns {void}
+     */
     playSceneTone(game) {
       game.playAudio("sound-lab");
     },
 
+    /**
+     * @param {StoryEngine} game
+     * @returns {void}
+     */
     playEndingTone(game) {
       game.playAudio("sound-ending");
     }
   };
 
-  window.VisualNovelEngine.boot({
-    startSceneId: "intro-scene",
-    initialState: {
-      broughtBackpack: false,
-      travelStyle: null,
-      helpedAlex: false,
-      recoveredNotepad: false,
-      pickedUpMug: false,
-      ending: null
-    },
-    conditions: storyConditions,
-    actions: storyActions
-  });
-}());
+VisualNovelEngine.boot({
+  startSceneId: "intro-scene",
+  initialState: storyInitialState,
+  conditions: /** @type {Record<string, import("./engine.js").EngineCondition>} */ (storyConditions),
+  actions: /** @type {Record<string, import("./engine.js").EngineAction>} */ (storyActions)
+});

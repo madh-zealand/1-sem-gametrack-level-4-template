@@ -13,8 +13,8 @@ It is intentionally simple:
 
 - `index.html`: scene markup, step markup, and the sample story
 - `styles.css`: layout, visual styling, and character highlighting
-- `scripts/engine.js`: reusable engine runtime, DOM bootstrapping, scaling, audio helpers, and step handling
-- `scripts/story.js`: only story-specific state, helper functions, and custom actions
+- `scripts/engine.js`: reusable ES module with the engine runtime, DOM bootstrapping, scaling, audio helpers, and step handling
+- `scripts/story.js`: ES module with only story-specific state, helper functions, conditions, and custom actions
 - `assets/images/`: flat SVG backgrounds and characters with simple text labels
 - `assets/audio/`: two small WAV tones used by the sample
 
@@ -108,7 +108,7 @@ const storyActions = {
   }
 };
 
-window.VisualNovelEngine.boot({
+VisualNovelEngine.boot({
   startSceneId: "intro-scene",
   initialState: {
     pickedUpMug: false,
@@ -123,7 +123,15 @@ window.VisualNovelEngine.boot({
 
 ## Run it
 
-Open `index.html` in a browser.
+Serve the project through a small local web server and open `index.html`.
+
+Example:
+
+```bash
+python -m http.server 8000
+```
+
+Then open `http://localhost:8000/`.
 
 For teaching, students can usually stay in three places:
 
